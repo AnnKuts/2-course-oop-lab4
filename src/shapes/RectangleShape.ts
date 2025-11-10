@@ -22,6 +22,16 @@ export class RectangleShape extends Shape implements Rectangle {
 
   show(ctx: CanvasRenderingContext2D): void {
     ctx.strokeStyle = this.strokeColor || 'black';
+    
+    this.isFilled && this.fillColor && (() => {
+      ctx.fillStyle = this.fillColor;
+      const x = Math.min(this.xs1, this.xs2);
+      const y = Math.min(this.ys1, this.ys2);
+      const width = Math.abs(this.xs2 - this.xs1);
+      const height = Math.abs(this.ys2 - this.ys1);
+      ctx.fillRect(x, y, width, height);
+    })();
+    
     this.drawRect(ctx, this.xs1, this.ys1, this.xs2, this.ys2);
   }
 

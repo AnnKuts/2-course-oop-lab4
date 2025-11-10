@@ -10,27 +10,64 @@ interface ToolbarProps {
   onAbout: () => void;
   onCubeSelect: () => void;
   onLineOOSelect: () => void;
-  color?: string;
-  onColorChange?: (color: string) => void;
+  onBack: () => void;
+  strokeColor?: string;
+  onStrokeColorChange?: (color: string) => void;
+  fillColor?: string;
+  onFillColorChange?: (color: string) => void;
+  isFilled?: boolean;
+  onFilledChange?: (filled: boolean) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
-                                           onPointSelect,
-                                           onLineSelect,
-                                           onRectSelect,
-                                           onEllipseSelect, onCubeSelect, onLineOOSelect, color, onColorChange
-                                         }) => {
+  onPointSelect,
+  onLineSelect,
+  onRectSelect,
+  onEllipseSelect,
+  onCubeSelect,
+  onLineOOSelect,
+  onBack,
+  onClear,
+  strokeColor,
+  onStrokeColorChange,
+  fillColor,
+  onFillColorChange,
+  isFilled,
+  onFilledChange
+}) => {
   return (
     <div className="toolbar">
-      {onColorChange && (
+      {onStrokeColorChange && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingRight: 8 }}>
+          <label style={{ fontSize: 12 }}>Stroke:</label>
           <input
             type="color"
-            value={color}
-            onChange={(e) => onColorChange(e.target.value)}
-            aria-label="Color picker"
+            value={strokeColor}
+            onChange={(e) => onStrokeColorChange(e.target.value)}
+            aria-label="Stroke color"
           />
         </div>
+      )}
+      {onFillColorChange && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingRight: 8 }}>
+          <label style={{ fontSize: 12 }}>Fill:</label>
+          <input
+            type="color"
+            value={fillColor}
+            onChange={(e) => onFillColorChange(e.target.value)}
+            aria-label="Fill color"
+          />
+        </div>
+      )}
+      {onFilledChange && (
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, paddingRight: 8 }}>
+          <input
+            type="checkbox"
+            checked={isFilled}
+            onChange={(e) => onFilledChange(e.target.checked)}
+          />
+          Fill
+        </label>
       )}
       <Tooltip text="Point">
         <Button onClick={onPointSelect}>
@@ -60,6 +97,16 @@ const Toolbar: React.FC<ToolbarProps> = ({
       <Tooltip text="LineOO">
         <Button onClick={onLineOOSelect}>
           <img src="/lineOO.png" alt="LineOO" />
+        </Button>
+      </Tooltip>
+      <Tooltip text="Undo">
+        <Button onClick={onBack}>
+          <img src="/back.png" alt="Clear" />
+        </Button>
+      </Tooltip>
+      <Tooltip text="Clear">
+        <Button onClick={onClear}>
+<img src="/clear.png" alt="Clear" />
         </Button>
       </Tooltip>
     </div>

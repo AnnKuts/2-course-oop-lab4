@@ -8,7 +8,7 @@ export class MyEditor {
   private startX = 0;
   private startY = 0;
   private savedImageData: ImageData | null = null;
-  private readonly N = 111;
+  private N = 111;
 
   setContext(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
@@ -72,6 +72,13 @@ export class MyEditor {
   clear() {
     this.shapes = [];
     this.onPaint();
+  }
+
+  undo() {
+    if (this.shapes.length > 0) {
+      this.shapes.pop();
+      this.onPaint();
+    }
   }
 }
 

@@ -21,6 +21,14 @@ export class EllipseShape extends Shape implements Ellipse {
 
     ctx.strokeStyle = this.strokeColor || 'black';
     ctx.lineWidth = 1.5;
+    
+    this.isFilled && this.fillColor && (() => {
+      ctx.fillStyle = this.fillColor;
+      ctx.beginPath();
+      ctx.ellipse(x + width / 2, y + height / 2, width / 2, height / 2, 0, 0, Math.PI * 2);
+      ctx.fill();
+    })();
+    
     this.drawEllipse(ctx, x + width / 2, y + height / 2, width, height);
   }
 
