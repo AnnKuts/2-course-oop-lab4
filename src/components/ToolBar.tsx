@@ -8,16 +8,30 @@ interface ToolbarProps {
   onEllipseSelect: () => void;
   onClear: () => void;
   onAbout: () => void;
+  onCubeSelect: () => void;
+  onLineOOSelect: () => void;
+  color?: string;
+  onColorChange?: (color: string) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
                                            onPointSelect,
                                            onLineSelect,
                                            onRectSelect,
-                                           onEllipseSelect,
+                                           onEllipseSelect, onCubeSelect, onLineOOSelect, color, onColorChange
                                          }) => {
   return (
     <div className="toolbar">
+      {onColorChange && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingRight: 8 }}>
+          <input
+            type="color"
+            value={color}
+            onChange={(e) => onColorChange(e.target.value)}
+            aria-label="Color picker"
+          />
+        </div>
+      )}
       <Tooltip text="Point">
         <Button onClick={onPointSelect}>
           <img src="/point.png" alt="Point" />
@@ -36,6 +50,16 @@ const Toolbar: React.FC<ToolbarProps> = ({
       <Tooltip text="Ellipse">
         <Button onClick={onEllipseSelect}>
           <img src="/ellipse.png" alt="Ellipse" />
+        </Button>
+      </Tooltip>
+      <Tooltip text="Cube">
+        <Button onClick={onCubeSelect}>
+          <img src="/cube.png" alt="Cube" />
+        </Button>
+      </Tooltip>
+      <Tooltip text="LineOO">
+        <Button onClick={onLineOOSelect}>
+          <img src="/lineOO.png" alt="LineOO" />
         </Button>
       </Tooltip>
     </div>

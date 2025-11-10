@@ -7,10 +7,9 @@ export class RectShape extends Shape {
     const width = Math.abs(this.xs2 - this.xs1);
     const height = Math.abs(this.ys2 - this.ys1);
 
-    ctx.fillStyle = 'yellow';
-    ctx.fillRect(x, y, width, height);
-    
-    ctx.strokeStyle = 'black';
+    this.fillColor && (ctx.fillStyle = this.fillColor, ctx.fillRect(x, y, width, height));
+
+    ctx.strokeStyle = this.strokeColor || 'black';
     ctx.lineWidth = 1.3;
     ctx.strokeRect(x, y, width, height);
   }

@@ -23,7 +23,7 @@ export class EllipseShape extends Shape {
       Math.PI * 2
     );
     
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = this.strokeColor || 'black';
     ctx.lineWidth = 1.5;
     ctx.stroke();
   }

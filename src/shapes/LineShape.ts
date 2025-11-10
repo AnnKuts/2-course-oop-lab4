@@ -2,7 +2,7 @@ import { Shape } from './Shape.ts';
 
 export class LineShape extends Shape {
   show(ctx: CanvasRenderingContext2D): void {
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = this.strokeColor || 'black';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(this.xs1, this.ys1);
