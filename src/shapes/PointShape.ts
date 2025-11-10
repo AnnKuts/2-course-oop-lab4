@@ -4,6 +4,7 @@ import { PointImpl } from '../interfaces/Point.ts';
 
 export class PointShape extends Shape implements Point {
   drawPoint = PointImpl.drawPoint;
+  showPoint = PointImpl.showPoint;
 
   constructor(xs1: number, ys1: number) {
     super();
@@ -11,9 +12,7 @@ export class PointShape extends Shape implements Point {
   }
 
   show(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = this.fillColor || '#000000';
-    ctx.strokeStyle = this.strokeColor || '#000000';
-    this.drawPoint(ctx, this.xs1, this.ys1);
+    this.showPoint(ctx, this.xs1, this.ys1, this.fillColor || '#000000', this.strokeColor || '#000000');
   }
 
   getName(): string {

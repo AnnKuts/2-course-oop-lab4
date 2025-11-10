@@ -10,7 +10,7 @@ interface ToolbarProps {
   onAbout: () => void;
   onCubeSelect: () => void;
   onLineOOSelect: () => void;
-  onBack: () => void;
+  onUndo: () => void;
   strokeColor?: string;
   onStrokeColorChange?: (color: string) => void;
   fillColor?: string;
@@ -26,7 +26,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
   onEllipseSelect,
   onCubeSelect,
   onLineOOSelect,
-  onBack,
+  onUndo,
   onClear,
   strokeColor,
   onStrokeColorChange,
@@ -100,7 +100,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
         </Button>
       </Tooltip>
       <Tooltip text="Undo">
-        <Button onClick={onBack}>
+        <Button onClick={onUndo}>
           <img src="/back.png" alt="Clear" />
         </Button>
       </Tooltip>

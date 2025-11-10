@@ -10,6 +10,9 @@ interface MenuBarProps {
   onEllipseSelect: () => void;
   onClear: () => void;
   onAbout: () => void;
+  onCubeSelect: () => void;
+  onLineOOSelect: () => void;
+  onUndo: () => void;
 }
 
 const MenuBar: FC<MenuBarProps> = ({
@@ -19,7 +22,7 @@ const MenuBar: FC<MenuBarProps> = ({
                                      onRectSelect,
                                      onEllipseSelect,
                                      onClear,
-                                     onAbout,
+                                     onAbout, onCubeSelect, onLineOOSelect, onUndo
                                    }) => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
@@ -67,7 +70,18 @@ const MenuBar: FC<MenuBarProps> = ({
     onAbout();
     closeMenu();
   };
-
+  const handleCubeClick = () => {
+    onCubeSelect();
+    closeMenu();
+  };
+  const handleLineOOClick = () => {
+    onLineOOSelect();
+    closeMenu();
+  };
+  const handleUndoClick = () => {
+    onUndo();
+    closeMenu();
+  };
   return (
     <>
       <div className="menu-bar">
@@ -84,6 +98,9 @@ const MenuBar: FC<MenuBarProps> = ({
               <Button className="dropdown-item" onClick={handleClearClick}>
                 Clear
               </Button>
+              <Button className="dropdown-item" onClick={handleUndoClick}>
+                Undo
+              </Button>
             </div>
           )}
         </div>
@@ -98,30 +115,42 @@ const MenuBar: FC<MenuBarProps> = ({
           </button>
           {openMenu === 'objects' && (
             <div className="dropdown">
-              <button
+              <Button
                 className={`dropdown-item ${currentTool === 'Point' ? 'selected' : ''}`}
                 onClick={handlePointClick}
               >
                 Point
-              </button>
-              <button
+              </Button>
+              <Button
                 className={`dropdown-item ${currentTool === 'Line' ? 'selected' : ''}`}
                 onClick={handleLineClick}
               >
                 Line
-              </button>
-              <button
+              </Button>
+              <Button
                 className={`dropdown-item ${currentTool === 'Rectangle' ? 'selected' : ''}`}
                 onClick={handleRectClick}
               >
                 Rectangle
-              </button>
-              <button
+              </Button>
+              <Button
                 className={`dropdown-item ${currentTool === 'Ellipse' ? 'selected' : ''}`}
                 onClick={handleEllipseClick}
               >
                 Ellipse
-              </button>
+              </Button>
+              <Button
+                className={`dropdown-item ${currentTool === 'Cube' ? 'selected' : ''}`}
+                onClick={handleCubeClick}
+              >
+                Cube
+              </Button>
+              <Button
+                className={`dropdown-item ${currentTool === 'LineOO' ? 'selected' : ''}`}
+                onClick={handleLineOOClick}
+              >
+                LineOO
+              </Button>
             </div>
           )}
         </div>
@@ -136,9 +165,9 @@ const MenuBar: FC<MenuBarProps> = ({
           </button>
           {openMenu === 'about' && (
             <div className="dropdown">
-              <button className="dropdown-item" onClick={handleAboutClick}>
+              <Button className="dropdown-item" onClick={handleAboutClick}>
                 Show info
-              </button>
+              </Button>
             </div>
           )}
         </div>

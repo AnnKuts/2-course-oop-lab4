@@ -98,6 +98,10 @@ import { useRef, useEffect, useState } from 'react';
             Editor.clear();
           };
 
+          const handleUndo = () => {
+            Editor.undo();
+          };
+
           const handleAbout = () => {
             const aboutContent = (
               <>
@@ -123,10 +127,6 @@ import { useRef, useEffect, useState } from 'react';
             setIsModalOpen(true);
           };
 
-          const handleBack = () => {
-            Editor.undo();
-          };
-
           return (
             <div className="editor-container">
               <div className="top-bar">
@@ -138,6 +138,9 @@ import { useRef, useEffect, useState } from 'react';
                   onEllipseSelect={handleEllipseSelect}
                   onClear={handleClear}
                   onAbout={handleAbout}
+                  onCubeSelect={handleCubeSelect}
+                  onLineOOSelect={handleLineOOSelect}
+                  onUndo={handleUndo}
                 />
 
                 <Toolbar
@@ -147,7 +150,7 @@ import { useRef, useEffect, useState } from 'react';
                   onEllipseSelect={handleEllipseSelect}
                   onCubeSelect={handleCubeSelect}
                   onLineOOSelect={handleLineOOSelect}
-                  onBack={handleBack}
+                  onUndo={handleUndo}
                   onClear={handleClear}
                   onAbout={handleAbout}
                   strokeColor={strokeColor}
