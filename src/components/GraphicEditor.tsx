@@ -3,7 +3,7 @@ import { Editor } from '../MyEditor';
 import { Shape } from '../shapes/Shape';
 import { PointShape } from '../shapes/PointShape';
 import { LineShape } from '../shapes/LineShape';
-import { RectShape } from '../shapes/RectShape';
+import { RectangleShape } from '../shapes/RectangleShape';
 import { EllipseShape } from '../shapes/EllipseShape';
 import { CubeShape } from '../shapes/CubeShape';
 import { LineOOShape } from '../shapes/LineOOShape';
@@ -19,7 +19,7 @@ const GraphicEditor: React.FC = () => {
   const [currentTool, setCurrentTool] = useState<string>('Point');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
-  const [currentShapeFactory, setCurrentShapeFactory] = useState<() => Shape>(() => () => new PointShape());
+  const [currentShapeFactory, setCurrentShapeFactory] = useState<() => Shape>(() => () => new PointShape(0, 0));
   const [color, setColor] = useState<string>('#000000');
 
   useEffect(() => {
@@ -43,8 +43,10 @@ const GraphicEditor: React.FC = () => {
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const { x, y } = getMouseCoordinates(e);
     const shape = currentShapeFactory();
+
     shape.setStrokeColor(color);
     shape.setFillColor(color);
+
     Editor.start(shape);
     Editor.onLBDown(x, y);
   };
@@ -60,7 +62,7 @@ const GraphicEditor: React.FC = () => {
   };
 
   const handlePointSelect = () => {
-    setCurrentShapeFactory(() => () => new PointShape());
+    setCurrentShapeFactory(() => () => new PointShape(0, 0));
     updateTitle('Point');
   };
 
@@ -70,7 +72,7 @@ const GraphicEditor: React.FC = () => {
   };
 
   const handleRectSelect = () => {
-    setCurrentShapeFactory(() => () => new RectShape());
+    setCurrentShapeFactory(() => () => new RectangleShape(0, 0, 0, 0));
     updateTitle('Rectangle');
   };
 
