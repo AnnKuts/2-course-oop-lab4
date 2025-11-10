@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-2-course-oop-lab3/node_modules
+2-course-oop-lab4/node_modules
 dist
 dist-ssr
 *.local
