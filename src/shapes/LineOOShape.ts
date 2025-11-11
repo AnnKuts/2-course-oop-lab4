@@ -17,29 +17,38 @@ export class LineOOShape extends Shape implements Line, Ellipse {
     ctx.strokeStyle = this.strokeColor || 'black';
     ctx.lineWidth = 1;
 
-    const drawCircle = (centerX: number, centerY: number) => {
-      this.isFilled && this.fillColor && (() => {
-        ctx.fillStyle = this.fillColor;
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
-        ctx.fill();
-      })();
-      
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
-      ctx.stroke();
+    const drawEndEllipse = (centerX: number, centerY: number) => {
+      const x1 = centerX;
+      const y1 = centerY;
+      const x2 = centerX + r;
+      const y2 = centerY + r;
+
+      if (this.isFilled && this.fillColor) {
+        EllipseImpl.showEllipse(
+          ctx,
+          x1,
+          y1,
+          x2,
+          y2,
+          this.strokeColor || 'black',
+          this.fillColor,
+          true
+        );
+      } else {
+        this.drawEllipse(ctx, x1, y1, x2, y2);
+      }
     };
 
-    (dist > 2 * r) && (() => {
+    if (dist > 2 * r) {
       const newX1 = this.xs1 + (dx * r / dist);
       const newY1 = this.ys1 + (dy * r / dist);
       const newX2 = this.xs2 - (dx * r / dist);
       const newY2 = this.ys2 - (dy * r / dist);
       this.drawLine(ctx, newX1, newY1, newX2, newY2);
-    })();
+    }
 
-    drawCircle(this.xs1, this.ys1);
-    drawCircle(this.xs2, this.ys2);
+    drawEndEllipse(this.xs1, this.ys1);
+    drawEndEllipse(this.xs2, this.ys2);
   }
 
   getName(): string {

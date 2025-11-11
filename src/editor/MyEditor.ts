@@ -36,6 +36,7 @@ export class MyEditor {
     }
 
     this.ctx.save();
+    this.ctx.setLineDash([5, 5]);
     this.currentShape.set(this.startX, this.startY, x, y);
     this.currentShape.show(this.ctx);
     this.ctx.restore();
